@@ -1,22 +1,18 @@
 <template>
   <div id="app">
     <div id="select">
-      <div id="calc-option" 
-      :class="[curSelect == 'calc' ? 'selected' : 'unselected']"
-      @click="calcClick">
+      <div id="calc-option" :class="[curSelect == 'calc' ? 'selected' : 'unselected']" @click="calcClick">
         <img src="@/assets/calc-pic.png">
         <p>普通计算电阻</p>
       </div>
-      <div id="adapt-option"
-      :class="[curSelect == 'adapt' ? 'selected' : 'unselected']"
-      @click="adaptClick">
+      <div id="adapt-option" :class="[curSelect == 'adapt' ? 'selected' : 'unselected']" @click="adaptClick">
         <img src="@/assets/adapt-pic.png">
         <p>自动适配电阻</p>
       </div>
     </div>
-    <div id="fuction">
-      <Calculation></Calculation>
-      <Adaptation></Adaptation>
+    <div id="function">
+      <Calculation v-show="curSelect == 'calc'"></Calculation>
+      <Adaptation v-show="curSelect == 'adapt'"></Adaptation>
     </div>
   </div>
 </template>
@@ -33,10 +29,10 @@
       }
     },
     methods: {
-      calcClick: function() {
+      calcClick: function () {
         this.curSelect = 'calc'
       },
-      adaptClick: function() {
+      adaptClick: function () {
         this.curSelect = 'adapt'
       }
     },
@@ -58,19 +54,20 @@
   }
 
   .unselected {
-    background-color: rgba(68, 184, 228, .4);
+    background-color: rgba(68, 184, 228, .6);
     transition: all .15s ease-in-out;
   }
 
   #app {
     height: 100%;
-    width: 100%;
+    width: calc(100% + 50px);
     background-color: rgba(232, 233, 226, 1);
   }
 
   #select {
     height: 100%;
     width: 50px;
+    display: inline-block;
     transition: width .2s ease-in-out;
   }
 
@@ -85,7 +82,6 @@
     overflow: hidden;
     height: 50%;
     width: 100%;
-
     border-radius: 20px 0 0 20px;
   }
 
@@ -108,5 +104,14 @@
     font-size: 20px;
     letter-spacing: 6px;
     color: rgba(232, 233, 226, 1);
+  }
+
+  #function {
+    width: calc(100% - 112px);
+    height: calc(100% - 12px);
+    display: inline-block;
+    border: 6px solid rgba(68, 184, 228, 1);
+    border-radius: 0 20px 20px 0;
+    position: relative;
   }
 </style>
