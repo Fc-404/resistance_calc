@@ -1,7 +1,7 @@
 <template>
-    <div id="c-root">
+    <div id="c-root" @click="p">
         <div style="height: 100px;"></div>
-        <div id="sum" @click="show = !show">
+        <div id="sum">
             <span>电阻总和</span>
             <span>
                 {{ rSum }}
@@ -11,9 +11,8 @@
         </div>
         <div style="height: 20px;"></div>
         <div id="eqa-pool">
-            <transition name="rcell">
-                <RCell v-show="show" key="key"></RCell>
-            </transition>
+            <RCell v-show="isShow"></RCell>
+            <!-- <RCell v-show="isShow"></RCell> -->
         </div>
     </div>
 </template>
@@ -24,14 +23,17 @@
     export default {
         name: 'Calculation',
         props: {
-            msg: String
         },
         data: function () {
             return {
                 rSum: 90,
                 unit: 'k',
-                key: 0,
-                show: true,
+                isShow: true,
+            }
+        },
+        methods: {
+            p(str) {
+                this.isShow = !this.isShow
             }
         },
         components: {
@@ -85,19 +87,5 @@
         height: calc(100% - 420px);
         overflow: auto;
         padding: 50px;
-    }
-
-    .rcell-enter-active {
-        transition: all .2s ease-in-out;
-    }
-
-    .rcell-leave-active {
-        transition: all .2s ease-in-out;
-    }
-
-    .rcell-enter-from,
-    .rcell-leave-to {
-        transform: scale(0);
-        opacity: 0;
     }
 </style>
