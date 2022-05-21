@@ -1,5 +1,5 @@
 <template>
-    <div id="c-root" @click="p">
+    <div id="c-root">
         <div style="height: 100px;"></div>
         <div id="sum">
             <span>电阻总和</span>
@@ -10,9 +10,10 @@
             </span>
         </div>
         <div style="height: 20px;"></div>
+        <div style="height: 20px;"></div>
         <div id="eqa-pool">
             <RCell v-show="isShow"></RCell>
-            <!-- <RCell v-show="isShow"></RCell> -->
+            <RCell v-show="isShow"></RCell>
         </div>
     </div>
 </template>
@@ -24,7 +25,7 @@
         name: 'Calculation',
         props: {
         },
-        data: function () {
+        data() {
             return {
                 rSum: 90,
                 unit: 'k',
@@ -32,7 +33,7 @@
             }
         },
         methods: {
-            p(str) {
+            p() {
                 this.isShow = !this.isShow
             }
         },
@@ -54,6 +55,7 @@
         width: 100%;
         height: 200px;
         background-color: rgba(68, 184, 228, .6);
+        box-shadow: 0 5px 20px 1px #ccc;
         position: relative;
         font-family: 'youyuan';
     }
@@ -84,7 +86,7 @@
 
     #eqa-pool {
         width: calc(100% - 100px);
-        height: calc(100% - 420px);
+        height: calc(100% - 440px);
         overflow: auto;
         padding: 50px;
     }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="select">
+    <div id="app-select">
       <div id="calc-option" :class="[curSelect == 'calc' ? 'selected' : 'unselected']" @click="calcClick">
         <img src="@/assets/calc-pic.png">
         <p>普通计算电阻</p>
@@ -10,7 +10,7 @@
         <p>自动适配电阻</p>
       </div>
     </div>
-    <div id="function">
+    <div id="app-function">
       <Calculation v-show="curSelect == 'calc'"></Calculation>
       <Adaptation v-show="curSelect == 'adapt'"></Adaptation>
     </div>
@@ -23,7 +23,7 @@
 
   export default {
     name: 'App',
-    data: function () {
+    data() {
       return {
         curSelect: 'calc',
       }
@@ -62,16 +62,17 @@
     height: 100%;
     width: calc(100% + 50px);
     background-color: rgba(232, 233, 226, 1);
+    user-select: none;
   }
 
-  #select {
+  #app-select {
     height: 100%;
     width: 50px;
     display: inline-block;
     transition: width .2s ease-in-out;
   }
 
-  #select:hover {
+  #app-select:hover {
     width: 90px;
     transition: width .2s ease-in-out;
   }
@@ -106,7 +107,7 @@
     color: rgba(232, 233, 226, 1);
   }
 
-  #function {
+  #app-function {
     width: calc(100% - 112px);
     height: calc(100% - 12px);
     display: inline-block;
