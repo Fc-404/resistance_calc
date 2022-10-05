@@ -1,0 +1,40 @@
+/* squeeze be used for Transition Tag */
+.squeeze-enter-active,
+.squeeze-leave-active {
+  transition: all .2s ease-in-out;
+}
+
+.squeeze-enter-from,
+.squeeze-leave-to {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* loading be used for Loading Box */
+.loading {
+  border-radius: 12px;
+  background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+  opacity: .1;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 64px 64px white;
+  transform: skewX(-30deg);
+  animation: bright 1s linear infinite;
+}
+
+@keyframes bright {
+  from {
+    margin-left: -100px;
+  }
+
+  to {
+    margin-left: calc(100% + 100px);
+  }
+}

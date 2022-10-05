@@ -44,30 +44,25 @@
 </script>
 
 <style scoped>
-  .white {
-    background-color: rgba(232, 233, 226, 1);
-  }
-
   .selected {
-    background-color: rgba(68, 184, 228, 1);
-    transition: all .15s ease-in-out;
+    background-image: linear-gradient(135deg, #3C8CE7 10%, #00EAFF 100%);
   }
 
   .unselected {
-    background-color: rgba(68, 184, 228, .6);
-    transition: all .15s ease-in-out;
+    background-color: #a8dbf0;
   }
 
   #app {
     height: 100%;
     width: calc(100% + 50px);
-    background-color: rgba(232, 233, 226, 1);
+    background-color: #E8E8E8;
     user-select: none;
   }
 
   #app-select {
     height: 100%;
     width: 50px;
+    box-shadow: 0 0 20px 10px #BBB;
     display: inline-block;
     transition: width .2s ease-in-out;
   }
@@ -83,7 +78,6 @@
     overflow: hidden;
     height: 50%;
     width: 100%;
-    border-radius: 20px 0 0 20px;
   }
 
   #calc-option img,
@@ -104,15 +98,15 @@
     text-align: center;
     font-size: 20px;
     letter-spacing: 6px;
-    color: rgba(232, 233, 226, 1);
+    color: white;
   }
 
   #app-function {
-    width: calc(100% - 112px);
-    height: calc(100% - 12px);
+    width: calc(100% - 150px);
+    height: calc(100% - 50px);
     display: inline-block;
-    border: 6px solid rgba(68, 184, 228, 1);
-    border-radius: 0 20px 20px 0;
     position: relative;
+    margin: 25px;
+    margin-bottom: 0;
   }
 </style>

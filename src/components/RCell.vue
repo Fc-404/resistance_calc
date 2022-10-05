@@ -1,17 +1,15 @@
 <template>
-  <transition name="rcell">
-    <div id="rcell-root">
-      <span id="rcell-sum">{{ rSum }}<span style="color: #147196;"> Ω</span></span>
-      <transition-group name="rcell" tag="inRcellPool">
-        <div id="rcell-input" v-for="i in count" :key="i">
+    <div id="root-rcell">
+      <span id="sum">{{ rSum }}<span style="color: #147196;"> Ω</span></span>
+      <transition-group name="squeeze" tag="inRcellPool">
+        <div id="input" v-for="i in count" :key="i">
           <input v-model="va[i-1]" :onkeyup="checkInput(i)">
           <div @click="inDel(i-1)">-</div>
         </div>
       </transition-group>
-      <div id="rcell-add" class="rcell-add" @click="add">+</div>
-      <div id="rcell-in-add" class="rcell-add" @click="inAdd">+</div>
+      <div id="add" class="add" @click="add">+</div>
+      <div id="in-add" class="add" @click="inAdd">+</div>
     </div>
-  </transition>
 </template>
 
 <script>
@@ -79,53 +77,54 @@
     computed: {
       rSum() {
         var sum = 0
-        for (var i in this.va) {
-          var temp = 0
+        var rlist = []
+        for (let i in this.va) {
           switch (this.va[i][this.va[i].length - 1]) {
             case 'k':
             case 'K':
-              sum += parseInt(this.va[i].replace(/[kK]/, '000'))
+              rlist.push(parseInt(this.va[i].replace(/[kK]/, '000')))
               break
             case 'm':
             case 'M':
-              sum += parseInt(this.va[i].replace(/[mM]/, '000000'))
+              rlist.push(parseInt(this.va[i].replace(/[mM]/, '000000')))
               break
             default:
-              sum += parseInt(this.va[i])
+              rlist.push(parseInt(this.va[i]))
           }
         }
-        return sum
+        var overR = 0
+        for (let i of rlist) {
+          if (i == 0)
+            continue
+          overR += (1 / i)
+        }
+        var R = 0
+        if (overR != 0) {
+          R = Number((1 / overR).toFixed(2))
+        }
+
+        return R
       }
     }
   }
 </script>
 
 <style scoped>
-  .rcell-enter-active,
-  .rcell-leave-active {
-    transition: all .2s ease-in-out;
-  }
-
-  .rcell-enter-from,
-  .rcell-leave-to {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  #rcell-root {
+  #root-rcell {
     display: inline-block;
     position: relative;
     margin: 60px 20px 0 0;
-    box-shadow: 5px 5px 20px 1px #ccc;
+    box-shadow: 10px 10px 10px 1px #ccc;
     border-radius: 20px;
     vertical-align: top;
+    background-image: linear-gradient( 135deg, #FFFFFF 10%, #E8E8E8 100%);;
   }
 
-  #rcell-sum {
+  #sum {
     height: 20px;
     font-size: 18px;
     color: white;
-    background-color: rgba(68, 184, 228, .6);
+    background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
     padding: 6px;
     border-radius: 6px;
     position: absolute;
@@ -133,17 +132,17 @@
     left: 20px;
   }
 
-  #rcell-input {
+  #input {
     height: 60px;
     width: 200px;
     display: block;
     border-radius: 12px;
-    background-color: rgba(68, 184, 228, 1);
+    background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
     margin: 20px 100px 20px 20px;
     position: relative;
   }
 
-  #rcell-input input {
+  #input input {
     margin: 0;
     height: 30px;
     width: 140px;
@@ -159,7 +158,7 @@
     outline: none;
   }
 
-  #rcell-input div {
+  #input div {
     width: 45px;
     height: 60px;
     position: absolute;
@@ -169,18 +168,19 @@
     text-align: center;
     font-size: 42px;
     line-height: 60px;
-    color: #5e5e5e;
+    font-weight: 900;
+    color: tomato;
     user-select: none;
-    transition: all .1s ease-in-out;
+    transition: all .15s ease-in-out;
   }
 
-  #rcell-input div:hover {
+  #input div:hover {
     color: white;
     background-color: tomato;
-    transition: all .1s ease-in-out;
+    transition: all .15s ease-in-out;
   }
 
-  .rcell-add {
+  .add {
     display: inline-block;
     font-size: 42px;
     font-weight: 900;
@@ -192,23 +192,23 @@
     margin: 0 20px;
     vertical-align: top;
     user-select: none;
-    transition: all .1s ease-in-out;
-    color: #5e5e5e;
+    transition: all .15s ease-in-out;
+    color: #0396FF;
   }
 
-  .rcell-add:hover {
-    background-color: rgba(68, 184, 228, 1);
+  .add:hover {
+    background-color: #0396FF;
     color: white;
-    transition: all .1s ease-in-out;
+    transition: all .15s ease-in-out;
   }
 
-  #rcell-add {
+  #add {
     position: absolute;
     top: 20px;
     left: calc(100% - 100px);
   }
 
-  #rcell-in-add {
+  #in-add {
     display: block;
     position: relative;
     left: 80px;

@@ -1,6 +1,6 @@
 <template>
-  <div id="c-root">
-    <div style="height: 100px;"></div>
+  <div id="root-calc">
+    <div style="height: 20px;"></div>
     <div id="sum">
       <span>电阻总和</span>
       <span>
@@ -8,11 +8,12 @@
       </span>
     </div>
     <div id="eqa-pool">
-      <transition-group name="rcell" tag="rcellPool">
+      <transition-group name="squeeze" tag="rcellPool">
         <div v-for="i in rcellCount" :key="i" style="display: inline-block">
           <RCell @updateResistance="updateResistance($event)" @delRCell="delRCell($event)" @addRCell="addRCell($event)"
             :rcellInfo="rcellArr[i-1]" :index="i"></RCell>
         </div>
+        <div style="height: 80px" key="fixed"></div>
       </transition-group>
     </div>
   </div>
@@ -75,18 +76,7 @@
 </script>
 
 <style scoped>
-  .rcell-enter-active,
-  .rcell-leave-active {
-    transition: all .2s ease-in-out;
-  }
-
-  .rcell-enter-from,
-  .rcell-leave-to {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  #c-root {
+  #root-calc {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -96,8 +86,7 @@
   #sum {
     width: 100%;
     height: 200px;
-    background-color: rgba(68, 184, 228, .6);
-    box-shadow: 0 5px 20px 1px #ccc;
+    background-image: linear-gradient( 135deg, #00EAFF 10%, #3C8CE7 100%);
     position: relative;
     font-family: 'youyuan';
   }
@@ -107,7 +96,7 @@
     font-weight: 200;
     position: absolute;
     bottom: 20px;
-    left: calc(50% - 150px);
+    left: calc(40% - 150px);
     color: rgb(20, 113, 150);
   }
 
@@ -116,7 +105,7 @@
     font-weight: 500;
     position: absolute;
     bottom: 0px;
-    left: 50%;
+    left: 40%;
     color: white;
   }
 
@@ -128,8 +117,8 @@
 
   #eqa-pool {
     width: calc(100% - 100px);
-    height: calc(100% - 440px);
+    height: calc(100% - 270px);
     overflow: auto;
-    padding: 50px;
+    padding: 50px 50px 0 50px;
   }
 </style>
